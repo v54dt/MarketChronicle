@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+service Server {
+    rpc GetQuotations(QuotationRequest) returns(Quotations) {}
+}
+
+message PriceVolume {
+    int32 price = 1;
+    int32 volume = 2;
+}
+
+message Quotation {
+    string symbol = 1;
+    int64 timestamp = 2;
+    bool trail_status = 3;
+    repeated PriceVolume matched = 4;
+    repeated PriceVolume bids = 5;
+    repeated PriceVolume asks = 6;
+}
+
+message QuotationRequest {
+    string symbol = 1;
+    int64 start = 2;
+    int64 end = 3;
+}
+
+message Quotations {
+    repeated Quotation quotation = 1;
+}
